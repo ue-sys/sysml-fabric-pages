@@ -20,7 +20,7 @@ inputs:
     description: Also render an SVG and a PNG of every view into views/ (needs Chrome, which GitHub's ubuntu runners have). Off unless 'true'.
     default: 'false'
   system-views:
-    description: Also render the built-in system views (Containment, General View, Interconnection) of every file, not only the views the model declares.
+    description: Also render the project's built-in system views (Containment, General View, Interconnection, drawn over every file), not only the views the model declares.
     default: 'false'
   path:
     description: Where to write the site, relative to the repository root.
