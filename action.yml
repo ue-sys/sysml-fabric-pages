@@ -1,0 +1,93 @@
+# The published action (README: "Releasing"). Composite, so it can hand its
+# output to actions/upload-pages-artifact itself, and the `.kpar` to
+# actions/upload-artifact; the deploy, and the
+# `pages: write` / `id-token: write` / `github-pages` environment it needs, are
+# the caller's job, because a composite action cannot grant them.
+name: SysML Fabric Pages
+description: Publish a SysML v2 model to GitHub Pages — an interactive diagram site, and the model as a .kpar.
+author: Unified Engineering Systems
+branding:
+  icon: share-2
+  color: blue
+inputs:
+  folder:
+    description: The model folder, relative to the repository root.
+    default: .
+  title:
+    description: The site's title. Defaults to the repository's name.
+    default: ''
+  images:
+    description: Also render an SVG and a PNG of every view into views/ (needs Chrome, which GitHub's ubuntu runners have). Off unless 'true'.
+    default: 'false'
+  system-views:
+    description: Also render the built-in system views (Containment, General View, Interconnection) of every file, not only the views the model declares.
+    default: 'false'
+  path:
+    description: Where to write the site, relative to the repository root.
+    default: _site
+  upload:
+    description: Upload the site as the Pages artifact. 'false' to use the files in a later step instead (a docs build, a commit).
+    default: 'true'
+  kpar:
+    description: Also write the model as a .kpar (the SysML v2 project interchange archive) and upload it as a workflow artifact.
+    default: 'true'
+  kpar-include:
+    description: Only these model files go in the .kpar — .gitignore-style globs relative to the folder, comma- or newline-separated (`structure`, `**/*-api.sysml`). Empty is every model file.
+    default: ''
+  kpar-exclude:
+    description: Leave these model files out of the .kpar — globs, as kpar-include. Applied after it.
+    default: ''
+  kpar-version:
+    description: The .kpar's version. Defaults to the tag that triggered the run (v1.2.0 -> 1.2.0), else 0.0.0.
+    default: ''
+outputs:
+  kpar:
+    description: The path of the .kpar on the runner, for a later step (empty when kpar is not 'true' or nothing passed the filter).
+    value: ${{ steps.build.outputs.kpar }}
+runs:
+  using: composite
+  steps:
+    # Public repositories only (an internal one counts as private). Here and
+    # not in dist/index.mjs, so the bundle itself still runs anywhere: the
+    # release's smoke test and a local run call node directly. toJSON, because
+    # a payload with no `repository.private` must be refused and
+    # `null != false` is false in an expression. Rejected:
+    # `github.repository_visibility`, which the contexts reference does not list.
+    - if: toJSON(github.event.repository.private) != 'false'
+      shell: bash
+      run: |
+        echo "::error::SysML Fabric Pages runs in public repositories only; $GITHUB_REPOSITORY is not public."
+        exit 1
+    # The PNG is drawn through an <img>, which sees system fonts only, and the
+    # boxes are sized for IBM Plex: without it the labels overrun. Best effort.
+    - if: inputs.images == 'true' && runner.os == 'Linux'
+      shell: bash
+      run: |
+        fc-list 2>/dev/null | grep -q 'IBM Plex Sans' && exit 0
+        (sudo apt-get install -y -qq fonts-ibm-plex || (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-ibm-plex)) >/dev/null 2>&1 \
+          || echo "::warning::could not install IBM Plex; PNG labels may overrun their boxes"
+    - id: build
+      shell: bash
+      run: node "$GITHUB_ACTION_PATH/dist/index.mjs"
+      env:
+        INPUT_FOLDER: ${{ inputs.folder }}
+        INPUT_TITLE: ${{ inputs.title }}
+        INPUT_IMAGES: ${{ inputs.images }}
+        INPUT_SYSTEM_VIEWS: ${{ inputs.system-views }}
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_KPAR: ${{ inputs.kpar }}
+        INPUT_KPAR_INCLUDE: ${{ inputs.kpar-include }}
+        INPUT_KPAR_EXCLUDE: ${{ inputs.kpar-exclude }}
+        INPUT_KPAR_VERSION: ${{ inputs.kpar-version }}
+    - if: inputs.upload == 'true'
+      uses: actions/upload-pages-artifact@v5
+      with:
+        path: ${{ inputs.path }}
+    # The .kpar as it is: `archive: false` (one file, named for itself), or it
+    # downloads as a zip holding a zip. No output (nothing passed the filter)
+    # means no upload.
+    - if: inputs.kpar == 'true' && steps.build.outputs.kpar != ''
+      uses: actions/upload-artifact@v7
+      with:
+        path: ${{ steps.build.outputs.kpar }}
+        archive: false

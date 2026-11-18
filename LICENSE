@@ -1,0 +1,105 @@
+SysML Fabric — End User Licence Agreement
+
+Copyright (c) 2026 Unified Engineering Systems. All rights reserved.
+
+This agreement is between you and Unified Engineering Systems ("UES"). It
+governs SysML Fabric in every form UES distributes it — the Visual Studio Code
+extension, the GitHub Action, the web application, the server, the MCP server
+and their updates (the "Software"). By installing, running or otherwise using
+the Software you accept this agreement. If you do not accept it, do not use
+the Software.
+
+1. Licence. UES grants you a non-exclusive, non-transferable,
+   non-sublicensable, revocable licence, free of charge unless UES has agreed
+   otherwise with you in writing, to install and use the Software in the form
+   UES distributes it, for your own purposes and those of the organisation you
+   act for.
+
+2. Your content. Models, layout files and everything the Software generates
+   from them — sites, images, exports — are yours. UES claims no rights in
+   them, and you may publish them as you wish.
+
+3. Restrictions. Except as this agreement allows or applicable law expressly
+   permits despite this restriction, you must not:
+   (a) copy the Software, other than as needed to install and use it;
+   (b) modify, adapt, translate or create derivative works of it;
+   (c) decompile, disassemble or reverse engineer it, or attempt to derive its
+       source code;
+   (d) distribute, sell, rent, lease, lend, sublicense or host the Software
+       for third parties, or make it available as a service;
+   (e) use it to build a competing product or service; or
+   (f) remove or alter any copyright, licence or proprietary notice in it.
+
+4. Artificial intelligence and automated analysis. "Software" in this
+   section includes its code in any form (source, compiled, minified or
+   bundled), its documentation, user interface, file formats, protocols,
+   network traffic and observable behaviour. You must not, and must not
+   permit, instruct or enable any person, tool or system to:
+   (a) use the Software, or any part of it, to train, fine-tune, distil,
+       ground, evaluate or benchmark any machine learning model or artificial
+       intelligence system, or include it in any dataset or corpus;
+   (b) submit, upload, paste or otherwise expose the Software's code, or
+       material derived from it, to any artificial intelligence system,
+       large language model, decompiler, deobfuscator or other automated
+       analysis tool in order to analyse, explain, summarise, translate,
+       deobfuscate or document how the Software works;
+   (c) produce, by any means, a specification, design, architecture,
+       algorithm description or other account of the Software's internal
+       workings, or software that reproduces, emulates or substitutes for
+       its functionality, informed by any analysis this agreement prohibits
+       — including through an intermediary or a "clean room" process; or
+   (d) scrape, crawl or systematically extract the Software by automated
+       means, other than through interfaces UES provides for that purpose.
+   This section does not restrict (i) using artificial intelligence agents
+   and tools to operate the Software through its documented interfaces
+   (including its MCP server and API) to create, check and edit your own
+   models, or (ii) using your own content, including what the Software
+   generates for you, with any tool. UES expressly reserves all rights in the
+   Software against text and data mining, including under Article 4(3) of
+   Directive (EU) 2019/790. A breach of this section is a material breach;
+   on UES's request you must delete, and stop using, any dataset, model,
+   specification or software produced in breach of it, and UES may seek
+   injunctive relief in addition to any other remedy.
+
+5. Source code. No licence to source code is granted. That a copy of the
+   Software is publicly visible (for example, the GitHub Action's repository)
+   grants no rights beyond this agreement.
+
+6. Third-party components. The Software includes third-party components
+   under their own licences, listed in the THIRD_PARTY_NOTICES file or other
+   notice distributed with it. Those licences govern those components, and
+   nothing in this agreement restricts rights they grant you.
+
+7. Hosted services. A service UES hosts that runs the Software is governed by
+   that service's own terms as well as this agreement.
+
+8. Ownership. The Software is licensed, not sold. UES and its licensors keep
+   all right, title and interest in it, including all intellectual property
+   rights. Feedback you give UES may be used without obligation to you.
+
+9. Termination. This licence ends automatically if you breach this
+   agreement, and UES may end it on notice at any time. On termination you
+   must stop using the Software and delete your copies. Sections 2, 4, 5, 6
+   and 8 to 11 survive termination.
+
+10. No warranty. To the maximum extent permitted by law, the Software is
+    provided "as is" and "as available", without warranty of any kind, express
+    or implied, including warranties of merchantability, fitness for a
+    particular purpose, accuracy and non-infringement.
+
+11. Limitation of liability. To the maximum extent permitted by law, UES is
+    not liable for any indirect, incidental, special, consequential or
+    punitive loss, or for loss of data, profits, revenue or goodwill, arising
+    from or related to the Software or this agreement, however caused, and
+    UES's total liability is limited to the amount you paid for the Software
+    (if any). Nothing in this agreement excludes, restricts or modifies any
+    right or remedy that applicable law (including consumer protection law)
+    does not allow to be excluded; where such law allows liability to be
+    limited, it is limited, at UES's option, to supplying the Software again
+    or paying the cost of doing so.
+
+12. General. This agreement is the entire agreement between you and UES
+    about the Software and supersedes any earlier licence for the same
+    version. If a provision is unenforceable, the rest remains in effect. A
+    failure to enforce a provision is not a waiver of it. You may not assign
+    this agreement; UES may.
