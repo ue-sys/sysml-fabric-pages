@@ -71,7 +71,7 @@ writes no archive (a warning says so). It is not deployed to Pages.
 | `folder` | `.` | the model folder, relative to the repository root |
 | `title` | the repository's name | the site's title |
 | `images` | `false` | `true` to render `views/` (needs Chrome — GitHub's ubuntu runners have it; elsewhere set `CHROME_BIN`) |
-| `system-views` | `false` | also render the project's built-in Containment / General View / Interconnection (once, over every file, under `project/`) |
+| `system-views` | `false` | also render the built-in Containment / General View / Interconnection: the project's (over every file, under `project/`) and, with two or more files, each file's own (under that file) |
 | `path` | `_site` | where the site is written |
 | `upload` | `true` | upload it as the Pages artifact; `false` to use the files in a later step instead (your own docs build, a commit) |
 | `kpar` | `true` | write the model as a `.kpar` and upload it as a workflow artifact |
